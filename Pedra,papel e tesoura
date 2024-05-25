@@ -1,0 +1,41 @@
+import random
+
+def jogada_jogador():
+    escolha = input("Escolha Pedra, Papel ou Tesoura: ").lower()
+    while escolha not in ['pedra', 'papel', 'tesoura']:
+        escolha = input("Escolha inválida. Escolha Pedra, Papel ou Tesoura: ").lower()
+    return escolha
+
+def jogada_computador():
+    return random.choice(['pedra', 'papel', 'tesoura'])
+
+def verifica_vencedor(jogador, computador):
+    if jogador == computador:
+        return "Empate"
+    elif (jogador == 'pedra' and computador == 'tesoura') or \
+         (jogador == 'papel' and computador == 'pedra') or \
+         (jogador == 'tesoura' and computador == 'papel'):
+        return "Você ganhou!"
+    else:
+        return "Você perdeu."
+
+def jogo():
+    placar_jogador = 0
+    placar_computador = 0
+    
+    for _ in range(3):
+        jogador = jogada_jogador()
+        computador = jogada_computador()
+        print("O computador escolheu:", computador)
+        resultado = verifica_vencedor(jogador, computador)
+        print(resultado)
+        if resultado == "Você ganhou!":
+            placar_jogador += 1
+        elif resultado == "Você perdeu.":
+            placar_computador += 1
+    
+    print("Placar final:")
+    print("Você:", placar_jogador)
+    print("Computador:", placar_computador)
+
+jogo()
